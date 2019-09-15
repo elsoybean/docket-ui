@@ -26,8 +26,15 @@ export default [
       }),
       commonjs({
         namedExports: {
-          react: ['useState', 'useEffect', 'useRef'],
-          'kkt-battle-events': ['applyToState'],
+          react: [
+            'useState',
+            'useEffect',
+            'useRef',
+            'Children',
+            'cloneElement',
+            'isValidElement',
+          ],
+          'react-is': ['ForwardRef'],
         },
       }),
       babel({
