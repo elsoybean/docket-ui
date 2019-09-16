@@ -1,5 +1,5 @@
 {
-  "name": "docker-ui",
+  "name": "docket-ui",
   "version": "1.0.0",
   "description": "React UI for DC Court Scraper tool",
   "main": "dist/bundle.js",
