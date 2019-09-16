@@ -1,6 +1,6 @@
 //@flow
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Card,
   CardMedia,
@@ -19,19 +19,27 @@ type Props = {
   onUpdateAddress: (id: string, address: Address) => void,
 };
 
+const initialAddress = {
+  street: '',
+  extra: '',
+  city: 'Washington',
+  state: 'DC',
+  zip: '',
+};
+
 const AddressEntryFlow = ({ caseId, onUpdateAddress }: Props) => {
+  const [loading, setLoading] = useState(true);
+  const [address, setAddress] = useState(initialAddress);
+  const streetRef = useRef(null);
+
+  useEffect(() => {
+    setAddress(initialAddress);
+    streetRef && streetRef.current && streetRef.current.focus();
+  }, [caseId]);
+
   const handleImageLoaded = () => {
     setLoading(false);
   };
-
-  const [loading, setLoading] = useState(true);
-  const [address, setAddress] = useState({
-    street: '',
-    extra: '',
-    city: 'Washington',
-    state: 'DC',
-    zip: '',
-  });
 
   const handleChange = (field) => (event) => {
     const newAddress = { ...address, [field]: event.target.value };
@@ -41,6 +49,9 @@ const AddressEntryFlow = ({ caseId, onUpdateAddress }: Props) => {
   const useStyles = makeStyles((theme) => ({
     image: {
       marginBottom: theme.spacing(3),
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     button: {
       margin: theme.spacing(1),
@@ -70,6 +81,8 @@ const AddressEntryFlow = ({ caseId, onUpdateAddress }: Props) => {
         <TextField
           fullWidth
           required
+          autoFocus
+          inputRef={streetRef}
           label="Street Address"
           value={address.street}
           onChange={handleChange('street')}
@@ -132,6 +145,7 @@ const AddressEntryFlow = ({ caseId, onUpdateAddress }: Props) => {
           fullWidth
           variant="contained"
           color="primary"
+          type="submit"
           disabled={
             !(
               address &&

@@ -13,6 +13,7 @@ import InfoIcon from '@material-ui/icons/Error';
 
 type Props = {
   error?: string,
+  success?: string,
 };
 
 type ContentProps = {
@@ -22,12 +23,12 @@ type ContentProps = {
   variant: 'success' | 'warning' | 'error' | 'info',
 };
 
-const Notice = ({ error }: Props) => {
+const Notice = ({ error, success }: Props) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setOpen(!!error);
-  }, [error]);
+    setOpen(!!error || !!success);
+  }, [error, success]);
 
   const variantIcon = {
     success: CheckCircleIcon,
@@ -120,11 +121,11 @@ const Notice = ({ error }: Props) => {
       autoHideDuration={6000}
       onClose={handleSnackbarClose}
     >
-      {error && (
+      {(error || success) && (
         <MySnackbarContent
-          variant="error"
+          variant={error ? 'error' : 'success'}
           className={classes.margin}
-          message={error}
+          message={error || success}
         />
       )}
     </Snackbar>
