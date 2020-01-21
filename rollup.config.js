@@ -35,6 +35,7 @@ export default [
             'isValidElement',
           ],
           'react-is': ['ForwardRef'],
+          'prop-types': ['elementType'],
         },
       }),
       babel({

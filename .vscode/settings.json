@@ -2,11 +2,13 @@
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.formatOnType": true,
-  "eslint.autoFixOnSave": true,
   "flow.pathToFlow": "${workspaceFolder}/node_modules/.bin/flow",
   "flow.showUncovered": true,
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "terminal.integrated.shell.windows": "D:\\Program Files\\Git\\bin\\sh.exe"
+  "terminal.integrated.shell.windows": "D:\\Program Files\\Git\\bin\\sh.exe",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
